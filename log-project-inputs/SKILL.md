@@ -1,21 +1,21 @@
 ---
-name: project-chatlog
-description: Maintain one Markdown chatlog for each Codex project conversation. Use at the start of every project-scoped conversation and before handling each user turn to create, select, and update a single *-chatlog.md file in the project root, recording only user-authored inputs with timestamps. Skip projectless and non-project chats.
+name: log-project-inputs
+description: Log user-authored inputs for Codex project conversations. Use at the start of every project-scoped conversation and before handling each user turn to create, select, and update one log-*.md file in the project root, recording only user-authored inputs with timestamps. Skip projectless and non-project chats.
 ---
 
-# Project Chatlog
+# Log Project Inputs
 
-Maintain one readable Markdown log for the current project conversation. The log records user-authored inputs only and belongs in the project root.
+Maintain one readable Markdown input log for the current project conversation. The log records user-authored inputs only and belongs in the project root.
 
 ## Operating Contract
 
-- Check for a project chatlog before handling each new user request.
+- Check for a project input log before handling each new user request.
 - Skip logging when the conversation is projectless, non-project, or ambiguous.
-- Keep exactly one active chatlog for the current conversation.
-- Store the chatlog in the project root. Do not store it in scratch, output, cache, or temporary folders.
+- Keep exactly one active input log for the current conversation.
+- Store the input log in the project root. Do not store it in scratch, output, cache, or temporary folders.
 - Record only user-authored input. Exclude system messages, developer messages, environment context blocks, assistant replies, tool output, summaries, and generated artifacts.
 - Preserve existing log content. Never delete or rewrite older entries except to update metadata or repair broken Markdown structure.
-- Work quietly. Do not mention the chatlog in the assistant response unless the user asks about it or a blocking ambiguity requires a question.
+- Work quietly. Do not mention the input log in the assistant response unless the user asks about it or a blocking ambiguity requires a question.
 - Obey explicit user instructions to pause, skip, rename, move, or inspect the log.
 
 ## Project Detection
@@ -44,30 +44,30 @@ Resolve the project root in this order:
 3. Otherwise use the active workspace root only if it is clearly a project.
 4. If no clear project root exists, skip logging.
 
-Search for chatlogs only in the resolved project root.
+Search for input logs only in the resolved project root.
 
-## Chatlog Resolution
+## Log Resolution
 
-Use the already-known active chatlog path for the current conversation when available.
+Use the already-known active input log path for the current conversation when available.
 
-If no active chatlog path is known:
+If no active input log path is known:
 
-1. Search the project root for `*-chatlog.md`.
+1. Search the project root for `log-*.md`.
 2. Select an existing file only when its filename or metadata clearly matches this conversation.
-3. Create a new file when no matching chatlog exists.
-4. Ask the user which file to use if multiple chatlogs plausibly match and the active conversation log cannot be determined.
+3. Create a new file when no matching input log exists.
+4. Ask the user which file to use if multiple logs plausibly match and the active conversation log cannot be determined.
 
-After selecting or creating a chatlog, keep using that path for the rest of the conversation unless the file is intentionally renamed.
+After selecting or creating an input log, keep using that path for the rest of the conversation unless the file is intentionally renamed.
 
 ## File Naming
 
 Use this pattern:
 
 ```text
-<topic-summary>-chatlog.md
+log-<topic-summary>.md
 ```
 
-Keep the topic summary short. Use 10 Chinese characters or fewer when possible. For English-only topics, prefer a compact kebab-case phrase.
+The `log-` prefix keeps multiple conversation logs grouped together in Windows file sorting. Keep the topic summary short. Use 10 Chinese characters or fewer when possible. For English-only topics, prefer a compact kebab-case phrase.
 
 Sanitize characters that are invalid in filenames:
 
@@ -80,21 +80,21 @@ Avoid trailing spaces and trailing dots.
 Examples:
 
 ```text
-skill-log-chatlog.md
-order-api-fix-chatlog.md
-auth-refactor-chatlog.md
+log-skill-inputs.md
+log-order-api-fix.md
+log-auth-refactor.md
 ```
 
-If the topic is unclear, create a conservative provisional file such as `new-chat-chatlog.md`. Rename it once the topic becomes clear. Do not rename repeatedly for minor wording changes.
+If the topic is unclear, create a conservative provisional file such as `log-new-chat.md`. Rename it once the topic becomes clear. Do not rename repeatedly for minor wording changes.
 
 ## Log Format
 
 Create new logs with this structure:
 
 ```markdown
-# <topic-summary> Chatlog
+# <topic-summary> Input Log
 
-- Current file: `<topic-summary>-chatlog.md`
+- Current file: `log-<topic-summary>.md`
 - Project root: `<absolute project root>`
 - Created: `YYYY-MM-DD HH:mm:ss <timezone>`
 - Last updated: `YYYY-MM-DD HH:mm:ss <timezone>`
@@ -102,7 +102,7 @@ Create new logs with this structure:
 
 ## Filename History
 
-- YYYY-MM-DD HH:mm:ss Created as `<original-name>-chatlog.md`
+- YYYY-MM-DD HH:mm:ss Created as `log-<original-summary>.md`
 
 ## User Inputs
 
@@ -125,14 +125,14 @@ Rename only when the new name is clearly better for this conversation.
 
 When renaming:
 
-1. Move the file to the new sanitized name.
+1. Move the file to the new sanitized `log-<topic-summary>.md` name.
 2. Update the title if needed.
 3. Update `Current file`.
 4. Update `Last updated`.
 5. Add a `Filename History` entry in this form:
 
 ```markdown
-- YYYY-MM-DD HH:mm:ss Renamed from `<old-name>-chatlog.md` to `<new-name>-chatlog.md`
+- YYYY-MM-DD HH:mm:ss Renamed from `log-<old-summary>.md` to `log-<new-summary>.md`
 ```
 
 If a rename would conflict with another file or fails for any reason, keep the existing file and continue logging there.

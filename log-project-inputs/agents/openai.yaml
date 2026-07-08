@@ -1,0 +1,4 @@
+interface:
+  display_name: "Log Project Inputs"
+  short_description: "Record project user inputs in one log"
+  default_prompt: "Use $log-project-inputs to maintain a single project-scoped input log."
