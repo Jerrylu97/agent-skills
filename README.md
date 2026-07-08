@@ -10,7 +10,7 @@ This repository is intentionally organized as a growing skill collection. Each s
 
 | Skill | Type | Summary |
 | --- | --- | --- |
-| [`log-project-inputs`](skills/log-project-inputs) | Codex skill | Logs user-authored inputs for project conversations into one `log-*.md` file in the project root. |
+| [`log-project-inputs`](skills/log-project-inputs) | Agent skill (Codex-compatible) | Logs user-authored inputs for project sessions into one `log-*.md` file in the project root. |
 
 ## Repository Layout
 
@@ -64,7 +64,7 @@ MIT
 
 | Skill | 类型 | 简介 |
 | --- | --- | --- |
-| [`log-project-inputs`](skills/log-project-inputs) | Codex skill | 将项目对话中的用户主动输入记录到项目根目录的一个 `log-*.md` 文件中。 |
+| [`log-project-inputs`](skills/log-project-inputs) | Agent skill (兼容 Codex) | 将项目会话中的用户主动输入记录到项目根目录的一个 `log-*.md` 文件中。 |
 
 ## 仓库结构
 

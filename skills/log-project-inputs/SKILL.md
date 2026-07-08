@@ -1,16 +1,28 @@
 ---
 name: log-project-inputs
-description: Log user-authored inputs for Codex project conversations. Use at the start of every project-scoped conversation and before handling each user turn to create, select, and update one log-*.md file in the project root, recording only user-authored inputs with timestamps. Skip projectless and non-project chats.
+description: Log user-authored inputs for project work across Codex, IDE, and other agent environments. Use automatically only when the active session is clearly project-scoped, such as a Codex project/worktree, a Git repository, or an IDE workspace with project markers. Do not auto-use in temporary, projectless, general-chat, or ambiguous contexts unless the user explicitly invokes this skill. Creates or updates one log-*.md file in the project root.
 ---
 
 # Log Project Inputs
 
-Maintain one readable Markdown input log for the current project conversation. The log records user-authored inputs only and belongs in the project root.
+Maintain one readable Markdown input log for the current project conversation or agent session. The log records user-authored inputs only and belongs in the project root.
+
+## Invocation Policy
+
+Use two distinct modes:
+
+- Automatic mode: run only when the current session is clearly attached to a real project.
+- Explicit mode: run when the user directly asks to use this skill, even if the host is not Codex.
+
+Do not auto-run for temporary chats, scratch folders, generated projectless workspaces, general Q&A, or ambiguous contexts. In those cases, skip silently unless the user explicitly invokes the skill.
+
+This skill is not Codex-only. In non-Codex agents or IDEs, apply the same project-root rules using the working directory, workspace folder, open repository, or equivalent host-provided context.
 
 ## Operating Contract
 
-- Check for a project input log before handling each new user request.
-- Skip logging when the conversation is projectless, non-project, or ambiguous.
+- In automatic mode, check for a project input log before handling each new user request only after project context is confirmed.
+- In explicit mode, first try to resolve a project root from the current directory, workspace, open repository, or user-provided path.
+- Skip logging when the context remains projectless, non-project, or ambiguous after root resolution.
 - Keep exactly one active input log for the current conversation.
 - Store the input log in the project root. Do not store it in scratch, output, cache, or temporary folders.
 - Record only user-authored input. Exclude system messages, developer messages, environment context blocks, assistant replies, tool output, summaries, and generated artifacts.
@@ -20,29 +32,36 @@ Maintain one readable Markdown input log for the current project conversation. T
 
 ## Project Detection
 
-Treat the conversation as project-scoped only when the active working directory or workspace root clearly belongs to a real project.
+Treat the session as project-scoped only when the active working directory, workspace root, IDE project, or host-provided project context clearly belongs to a real project.
 
 Project signals include:
 
+- A Codex project or worktree context.
+- An IDE workspace, editor project, or agent workspace opened on a project folder.
 - A Git repository.
 - Common project files such as `package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `pom.xml`, `build.gradle`, `composer.json`, `Gemfile`, `mix.exs`, `.sln`, `.csproj`, `deno.json`, `vite.config.*`, or `next.config.*`.
 - A user request that clearly asks to inspect, modify, test, document, or operate files in a local project folder.
 
 Skip logging when:
 
+- The skill was not explicitly invoked and the session is a temporary or general chat.
 - The workspace is a generated projectless Codex chat folder, such as `Documents/Codex/<date>/new-chat`.
-- The directory only contains generic folders such as `work/` and `outputs/`.
+- The directory only contains generic folders such as `work/`, `outputs/`, `tmp/`, or cache folders.
 - The user is asking general questions or brainstorming without a project folder.
 - No reliable project root can be identified.
+
+When explicit invocation conflicts with weak project signals, ask for the intended project folder instead of creating a log in a temporary location.
 
 ## Project Root Resolution
 
 Resolve the project root in this order:
 
-1. Use `git rev-parse --show-toplevel` when it succeeds.
-2. Otherwise use the nearest ancestor containing a clear project marker.
-3. Otherwise use the active workspace root only if it is clearly a project.
-4. If no clear project root exists, skip logging.
+1. Use a user-provided project path when the user explicitly names one.
+2. Use the host-provided project, workspace, worktree, or repository root when available.
+3. Use `git rev-parse --show-toplevel` when it succeeds.
+4. Otherwise use the nearest ancestor containing a clear project marker.
+5. Otherwise use the active working directory only if it is clearly a project.
+6. If no clear project root exists, skip logging or ask for a project path when explicitly invoked.
 
 Search for input logs only in the resolved project root.
 
