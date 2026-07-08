@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Chatlog"
+  short_description: "Keep one project chatlog of user inputs"
+  default_prompt: "Use $project-chatlog to maintain a single project-scoped chatlog."
