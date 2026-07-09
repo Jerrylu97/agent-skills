@@ -1,6 +1,6 @@
 ---
 name: reason-across-languages
-description: Use implicitly for Chinese, English, or mixed Chinese-English prompts that need complex reasoning, professional writing, terminology alignment, translation-aware drafting, bilingual output, or output-language control (中文, 英文, 全英文, 中英双语). Especially useful for business strategy, research synthesis, technical architecture, academic analysis, decision analysis, and English-first knowledge domains. Do not use for simple code edits, routine shell/git operations, or tasks where another specialized skill is clearly primary unless multilingual reasoning or language routing matters.
+description: Use implicitly only for Chinese, English, or mixed Chinese-English prompts that require complex or important reasoning, high-quality professional writing, nuanced terminology alignment, nontrivial bilingual output, or careful output-language control (中文, 英文, 全英文, 中英双语). Especially useful for strategy, research synthesis, technical architecture, academic analysis, decision analysis, executive writing, and English-first knowledge domains. Do not use for short/simple Q&A, simple translation, routine code edits, routine shell/git operations, or tasks where another specialized skill is primary unless cross-language precision materially matters.
 ---
 
 # Reason Across Languages
@@ -13,7 +13,7 @@ Do not expose private scratch work, intermediate translations, hidden framework 
 
 ## Invocation And Priority
 
-This skill is intended for both explicit invocation and implicit invocation when the user's prompt matches the frontmatter `description`; the user should not need to type `$reason-across-languages` for normal matching cases.
+This skill is intended for explicit invocation and narrowly scoped implicit invocation when the user's prompt matches the frontmatter `description`; the user should not need to type `$reason-across-languages` for complex matching cases.
 
 Before activation, the host may only see the skill name, description, and path. Keep trigger criteria in the frontmatter `description`; use this body to govern behavior after activation.
 
@@ -25,6 +25,25 @@ Follow this priority order:
 4. This skill's language routing, terminology, and reasoning-quality rules.
 
 If another specialized skill is primary, use it first or alongside this one. This skill governs language, terminology, and cross-language reasoning quality; it does not replace task-specific tooling.
+
+## Activation Gate
+
+Use this skill only when the task has at least one strong reason to justify the extra reasoning cost:
+
+- The user asks for deep, strategic, rigorous, professional, executive, academic, or high-stakes analysis.
+- The task requires nontrivial trade-offs, framework selection, decision analysis, research synthesis, technical architecture, or careful argumentation.
+- The prompt mixes Chinese and English in a way that could affect intent, terminology, audience, or final output language.
+- The requested artifact is important professional writing where tone, precision, and terminology matter.
+- The user explicitly asks for bilingual output, all-English output from Chinese instructions, English-first reasoning, terminology alignment, or cross-language polish.
+
+Do not use this skill for:
+
+- Short factual answers, quick definitions, casual chat, or low-stakes brainstorming.
+- Simple translation or basic rewriting where no domain reasoning or terminology alignment is needed.
+- Routine code edits, command execution, git operations, file moves, formatting, or debugging unless multilingual reasoning is central to the task.
+- Cases where the user explicitly asks for a very brief, fast, or minimal answer and language routing is obvious.
+
+If the skill has already activated but the task turns out to be simple, use lightweight mode: apply only the output-language routing rules, skip framework selection, and answer directly.
 
 ## Workflow
 
