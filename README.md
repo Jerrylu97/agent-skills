@@ -8,10 +8,10 @@ This repository is intentionally organized as a dedicated skill collection. Each
 
 ## Skills
 
-| Skill | Type | Summary |
-| --- | --- | --- |
-| [`log-project-inputs`](log-project-inputs) | Agent skill (Codex-compatible) | Logs user-authored inputs for project sessions into one `log-*.md` file in the project root. |
-| [`reason-across-languages`](reason-across-languages) | Agent skill (Codex-compatible) | Improves reasoning and output-language routing for Chinese, English, and mixed-language requests. |
+| Skill | Summary |
+| --- | --- |
+| [`log-project-inputs`](log-project-inputs) | Logs user-authored inputs for project sessions into one `log-*.md` file in the project root. |
+| [`reason-across-languages`](reason-across-languages) | Improves reasoning and output-language routing for Chinese, English, and mixed-language requests. |
 
 ## Repository Layout
 
@@ -66,10 +66,10 @@ MIT
 
 ## Skill 清单
 
-| Skill | 类型 | 简介 |
-| --- | --- | --- |
-| [`log-project-inputs`](log-project-inputs) | Agent skill (兼容 Codex) | 将项目会话中的用户主动输入记录到项目根目录的一个 `log-*.md` 文件中。 |
-| [`reason-across-languages`](reason-across-languages) | Agent skill (兼容 Codex) | 为中文、英文和混合语言请求增强推理质量，并按用户意图控制输出语言。 |
+| Skill | 简介 |
+| --- | --- |
+| [`log-project-inputs`](log-project-inputs) | 将项目会话中的用户主动输入记录到项目根目录的一个 `log-*.md` 文件中。 |
+| [`reason-across-languages`](reason-across-languages) | 为中文、英文和混合语言请求增强推理质量，并按用户意图控制输出语言。 |
 
 ## 仓库结构
 
