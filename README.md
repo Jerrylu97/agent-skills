@@ -32,6 +32,8 @@ Each top-level skill directory is intended to be independently installable when 
 
 Clone or download this repository, then copy the skill folder you want into the relevant agent's skills directory.
 
+The top-level skill folders in this repository are source/distribution folders. Install or copy a skill folder into your agent's supported skills location before expecting explicit or implicit invocation to work.
+
 For Codex, install `log-project-inputs` like this:
 
 ```text
@@ -89,6 +91,8 @@ reason-across-languages/
 ## 安装某个 Skill
 
 克隆或下载本仓库，然后把需要的 skill 文件夹复制到对应 agent 的 skills 目录。
+
+本仓库根目录下的 skill 文件夹是源码/分发结构。需要先把某个 skill 文件夹安装或复制到对应 agent 支持的 skills 目录中，之后显式调用和隐式触发才会生效。
 
 对于 Codex，可以这样安装 `log-project-inputs`：
 

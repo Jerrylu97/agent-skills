@@ -1,6 +1,6 @@
 ---
 name: reason-across-languages
-description: Enhance complex reasoning and professional writing across Chinese, English, and mixed-language prompts by privately clarifying intent in precise English when useful, selecting appropriate international concepts or frameworks, and answering in the user's requested or contextually appropriate language. Use for business strategy, research synthesis, technical architecture, academic analysis, decision analysis, professional writing, bilingual drafting, high-quality Chinese output from English-heavy knowledge domains, or requests mentioning cross-language thinking, English-first reasoning, terminology alignment, or Chinese/English output control.
+description: Use implicitly for Chinese, English, or mixed Chinese-English prompts that need complex reasoning, professional writing, terminology alignment, translation-aware drafting, bilingual output, or output-language control (中文, 英文, 全英文, 中英双语). Especially useful for business strategy, research synthesis, technical architecture, academic analysis, decision analysis, and English-first knowledge domains. Do not use for simple code edits, routine shell/git operations, or tasks where another specialized skill is clearly primary unless multilingual reasoning or language routing matters.
 ---
 
 # Reason Across Languages
@@ -10,6 +10,21 @@ description: Enhance complex reasoning and professional writing across Chinese, 
 Improve answer quality by using the strongest available conceptual language for reasoning, while making the final answer match the user's requested output language and task context.
 
 Do not expose private scratch work, intermediate translations, hidden framework selection, or step-by-step internal reasoning. When explanation is useful, provide a concise, user-facing rationale instead.
+
+## Invocation And Priority
+
+This skill is intended for both explicit invocation and implicit invocation when the user's prompt matches the frontmatter `description`; the user should not need to type `$reason-across-languages` for normal matching cases.
+
+Before activation, the host may only see the skill name, description, and path. Keep trigger criteria in the frontmatter `description`; use this body to govern behavior after activation.
+
+Follow this priority order:
+
+1. System and developer instructions from the host environment.
+2. Explicit user instructions, especially requested output language, audience, format, and tone.
+3. More specialized skills or tools required by the task, such as browsing, coding, document editing, or data processing.
+4. This skill's language routing, terminology, and reasoning-quality rules.
+
+If another specialized skill is primary, use it first or alongside this one. This skill governs language, terminology, and cross-language reasoning quality; it does not replace task-specific tooling.
 
 ## Workflow
 
