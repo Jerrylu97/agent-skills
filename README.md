@@ -11,12 +11,17 @@ This repository is intentionally organized as a growing skill collection. Each s
 | Skill | Type | Summary |
 | --- | --- | --- |
 | [`log-project-inputs`](skills/log-project-inputs) | Agent skill (Codex-compatible) | Logs user-authored inputs for project sessions into one `log-*.md` file in the project root. |
+| [`reason-across-languages`](skills/reason-across-languages) | Agent skill (Codex-compatible) | Improves reasoning and output-language routing for Chinese, English, and mixed-language requests. |
 
 ## Repository Layout
 
 ```text
 skills/
   log-project-inputs/
+    SKILL.md
+    agents/
+      openai.yaml
+  reason-across-languages/
     SKILL.md
     agents/
       openai.yaml
@@ -65,12 +70,17 @@ MIT
 | Skill | 类型 | 简介 |
 | --- | --- | --- |
 | [`log-project-inputs`](skills/log-project-inputs) | Agent skill (兼容 Codex) | 将项目会话中的用户主动输入记录到项目根目录的一个 `log-*.md` 文件中。 |
+| [`reason-across-languages`](skills/reason-across-languages) | Agent skill (兼容 Codex) | 为中文、英文和混合语言请求增强推理质量，并按用户意图控制输出语言。 |
 
 ## 仓库结构
 
 ```text
 skills/
   log-project-inputs/
+    SKILL.md
+    agents/
+      openai.yaml
+  reason-across-languages/
     SKILL.md
     agents/
       openai.yaml

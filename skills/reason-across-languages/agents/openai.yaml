@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reason Across Languages"
+  short_description: "Improve reasoning across Chinese and English"
+  default_prompt: "Use $reason-across-languages to analyze this multilingual request with precise terminology and answer in the appropriate language."
